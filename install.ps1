@@ -1,5 +1,4 @@
-Function Get-Folder($initialDirectory="")
-# borrowed from here: https://stackoverflow.com/a/25690250 
+Function Get-Folder()
 {
     [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
 
@@ -12,10 +11,24 @@ Function Get-Folder($initialDirectory="")
     {
         $folder += $foldername.SelectedPath
     }
+
+    # Checking if path was selected
+    if([string]::IsNullOrEmpty($folder) -eq $true){
+        $try_again = Read-Host -Prompt "No SPT install path chose, whould you like to try again? (y) or (n)"
+        
+        if($try_again -eq "y"){
+            return Get-Folder
+        }else{
+            # Closing script if nothing is chosen.
+            exit
+        }
+    }
+
     return $folder
 }
 
 $install_path = Get-Folder
+
 $desktop = [Environment]::GetFolderPath([Environment+SpecialFolder]::Desktop)
 
 Write-Output "Copying files"

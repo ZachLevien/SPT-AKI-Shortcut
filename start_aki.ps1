@@ -4,22 +4,22 @@ function Launch-If-Closed {
     )
 
     $IsRunning = Get-Process $ProcessName -ea SilentlyContinue
-    if( $IsRunning -eq $Null ){
+    if($Null -eq $IsRunning){
         Start-Process ".\$ProcessName.exe"
     }else{
-        echo "$ProcessName is already running"
+        Write-Output "$ProcessName is already running"
     }
 
 }
 
-echo "Starting Aki Server"
+Write-Output "Starting Aki Server"
 Launch-If-Closed -ProcessName "Aki.Server"
 
-echo "Waiting for server to start"
+Write-Output "Waiting for server to start"
 while ($true) {
     try{
-        if ($(curl -Uri http://127.0.0.1:6969/launcher/server/version).StatusCode -eq 200) {
-            echo "Starting Aki Client"
+        if ($(Invoke-WebRequest -Uri http://127.0.0.1:6969/launcher/server/version).StatusCode -eq 200) {
+            Write-Output "Starting Aki Client"
             Launch-If-Closed -ProcessName "Aki.Launcher"
             break
         }
