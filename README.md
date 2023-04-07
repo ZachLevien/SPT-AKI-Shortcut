@@ -1,5 +1,7 @@
 # SPT-AKI-Shortcut
 
+Launch both Aki.Server and Aki.Client from 1 simple shortcut.
+
 ### Start Here
 * Clone this repo OR Download the repo files
 * Execute the script `install.ps1`
