@@ -10,3 +10,7 @@ Launch both Aki.Server and Aki.Client from 1 simple shortcut.
     * If you don't know how execute the script, use 1 of these 2 options:
         * Right click on `install.ps1` and click "Run With Powershell"
         * Open Powershell, CD to folder, run `./install.ps1`
+
+### Info
+* `install.ps1` copies the `start_aki.ps1` to your aki installation path, and then creates a shortcut on your desktop.
+* `start_aki.ps1` starts the server, and then pokes local rest api for a 200 status code.  Once that 200 is recieved, it starts the client. 
